@@ -1,0 +1,91 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Authentication</title>
+    <link href="~/css/auth.css" rel="stylesheet" />
+</head>
+<body>
+    <br>
+    <br>
+    <div class="cont">
+        <!-- Sign-In Form -->
+        @using (Html.BeginForm("Login", "Auth", FormMethod.Post))
+        {
+            @Html.ValidationSummary(true)
+            <div class="form sign-in">
+                <h2>Welcome</h2>
+                <label>
+                    <span>Username</span>
+                    <input type="text" name="username" />
+                    @ViewData["usernameError"]
+                </label>
+                <label>
+                    <span>Password</span>
+                    <input type="password" name="password" />
+                    @ViewData["passwordError"]
+                </label>
+                <p class="forgot-pass">Forgot password?</p>
+                <button type="submit" class="submit">Sign In</button>
+                @ViewData["loginError"]
+            </div>
+        }
+
+        <!-- Toggle Between Sign-In and Sign-Up -->
+        <div class="sub-cont">
+            <div class="img">
+                <div class="img__text m--up">
+                    <h3>Don't have an account? Please Sign up!</h3>
+                </div>
+                <div class="img__text m--in">
+                    <h3>If you already have an account, just sign in.</h3>
+                </div>
+                <div class="img__btn">
+                    <span class="m--up">Sign Up</span>
+                    <span class="m--in">Sign In</span>
+                </div>
+            </div>
+
+            <!-- Sign-Up Form -->
+            @using (Html.BeginForm("Signup", "Auth", FormMethod.Post))
+            {
+                <div class="form sign-up">
+                    <h2>Create your Account</h2>
+                    <label>
+                        <span>Username</span>
+                        <input type="text" name="usernameSignup" />
+                        @ViewData["usernameSignupError"]
+                    </label>
+                    <label>
+                        <span>Password</span>
+                        <input type="password" name="passwordSignup" />
+                        @ViewData["passwordSignupError"]
+                    </label>
+                    <label>
+                        <span>Password Confirm</span>
+                        <input type="password" name="passwordConfirm" />
+                        @ViewData["confirmError"]
+                    </label>
+                    <button type="submit" class="submit">Sign Up</button>
+                </div>
+            }
+        </div>
+    </div>
+
+    <script>
+        document.querySelector('.img__btn').addEventListener('click', function () {
+            document.querySelector('.cont').classList.toggle('s--signup');
+        });
+    </script>
+</body>
+</html>
